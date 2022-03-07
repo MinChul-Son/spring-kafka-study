@@ -11,4 +11,11 @@ public class SpringKafkaStudyApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringKafkaStudyApplication.class, args);
     }
+
+    @Bean
+    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate) {
+        return args -> {
+            kafkaTemplate.send("quickstart-events", "hello-world");
+        };
+    }
 }
