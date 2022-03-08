@@ -35,7 +35,8 @@ public class KafkaTopicConfiguration {
     @Bean
     public KafkaAdmin.NewTopics topics() {
         return new KafkaAdmin.NewTopics(
-            TopicBuilder.name("topic3").build()
+            TopicBuilder.name("topic3").build(),
+            TopicBuilder.name("topic3-bytes").build()
         );
     }
 }
