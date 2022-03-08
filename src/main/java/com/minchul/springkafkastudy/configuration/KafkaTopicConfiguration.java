@@ -36,7 +36,9 @@ public class KafkaTopicConfiguration {
     public KafkaAdmin.NewTopics topics() {
         return new KafkaAdmin.NewTopics(
             TopicBuilder.name("topic3").build(),
-            TopicBuilder.name("topic3-bytes").build()
+            TopicBuilder.name("topic3-bytes").build(),
+            TopicBuilder.name("topic3-request").build(),
+            TopicBuilder.name("topic3-response").build()
         );
     }
 }
