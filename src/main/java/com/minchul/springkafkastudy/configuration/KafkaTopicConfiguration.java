@@ -31,4 +31,11 @@ public class KafkaTopicConfiguration {
 //    public AdminClient adminClient(KafkaAdmin kafkaAdmin) {
 //        return AdminClient.create(kafkaAdmin.getConfigurationProperties());
 //    }
+
+    @Bean
+    public KafkaAdmin.NewTopics topics() {
+        return new KafkaAdmin.NewTopics(
+            TopicBuilder.name("topic3").build()
+        );
+    }
 }
