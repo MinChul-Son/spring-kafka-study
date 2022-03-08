@@ -14,6 +14,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import com.minchul.springkafkastudy.producer.HelloProducer;
+
 @SpringBootApplication
 public class SpringKafkaStudyApplication {
     public static void main(String[] args) {
@@ -48,9 +50,10 @@ public class SpringKafkaStudyApplication {
 //    }
 
     @Bean
-    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate) {
+    public ApplicationRunner runner(HelloProducer producer) {
         return args -> {
-            kafkaTemplate.send("topic3", "Hello World!");
+            producer.async("topic3", "Hello World!(async)");
+            producer.sync("topic3", "Hello World!(sync)");
         };
     }
 }
