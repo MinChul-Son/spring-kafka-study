@@ -1,5 +1,6 @@
 package com.minchul.springkafkastudy;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
@@ -54,6 +55,8 @@ public class SpringKafkaStudyApplication {
         return args -> {
             producer.async("topic3", "Hello World!(async)");
             producer.sync("topic3", "Hello World!(sync)");
+            producer.routingSend("topic3", "Hello World!(routing)");
+            producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
         };
     }
 }
