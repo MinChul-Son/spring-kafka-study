@@ -57,6 +57,7 @@ public class SpringKafkaStudyApplication {
             producer.sync("topic3", "Hello World!(sync)");
             producer.routingSend("topic3", "Hello World!(routing)");
             producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
+            producer.replyingSend("topic3-request", "Ping Topic3");
         };
     }
 }
