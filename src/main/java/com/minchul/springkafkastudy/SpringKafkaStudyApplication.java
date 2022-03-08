@@ -46,4 +46,11 @@ public class SpringKafkaStudyApplication {
 //            }
 //        };
 //    }
+
+    @Bean
+    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate) {
+        return args -> {
+            kafkaTemplate.send("topic3", "Hello World!");
+        };
+    }
 }
