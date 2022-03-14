@@ -14,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
@@ -63,9 +64,13 @@ public class SpringKafkaStudyApplication {
 //    }
 
     @Bean
-    public ApplicationRunner runner(HelloProducer2 producer) {
+    public ApplicationRunner runner(HelloProducer2 producer, KafkaMessageListenerContainer<String, String> container) {
         return args -> {
-
+            producer.async("test4", "Hello, Container!!");
+            container.start();
+            container.pause();
+            container.resume();
+            container.stop();
         };
     }
 }
