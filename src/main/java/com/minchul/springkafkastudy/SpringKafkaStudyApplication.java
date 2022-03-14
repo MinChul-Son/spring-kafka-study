@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 
+import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
 
@@ -72,7 +73,9 @@ public class SpringKafkaStudyApplication {
 //            container.resume();
 //            container.stop();
 
-            producer.async("test4-listener", "Hello, Kafka Listener");
+//            producer.async("test4-listener", "Hello, Kafka Listener");
+            producer.asyncAnimal("test4-animal", new Animal("멍멍이", 2));
+
         };
     }
 }
