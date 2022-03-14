@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 
 import com.minchul.springkafkastudy.producer.HelloProducer;
+import com.minchul.springkafkastudy.producer.HelloProducer2;
 
 @SpringBootApplication
 public class SpringKafkaStudyApplication {
@@ -50,14 +51,21 @@ public class SpringKafkaStudyApplication {
 //        };
 //    }
 
+//    @Bean
+//    public ApplicationRunner runner(HelloProducer producer) {
+//        return args -> {
+//            producer.async("topic3", "Hello World!(async)");
+//            producer.sync("topic3", "Hello World!(sync)");
+//            producer.routingSend("topic3", "Hello World!(routing)");
+//            producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
+//            producer.replyingSend("topic3-request", "Ping Topic3");
+//        };
+//    }
+
     @Bean
-    public ApplicationRunner runner(HelloProducer producer) {
+    public ApplicationRunner runner(HelloProducer2 producer) {
         return args -> {
-            producer.async("topic3", "Hello World!(async)");
-            producer.sync("topic3", "Hello World!(sync)");
-            producer.routingSend("topic3", "Hello World!(routing)");
-            producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
-            producer.replyingSend("topic3-request", "Ping Topic3");
+
         };
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.requestreply.ReplyingKafkaTemplate;
 
-@Configuration
+//@Configuration
 public class ReplyingKafkaTemplateConfiguration {
     @Bean
     public ReplyingKafkaTemplate<String, String, String> replyingKafkaTemplate(ProducerFactory<String, String> producerFactory,

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.KafkaAdmin;
 
-@Configuration
+//@Configuration
 public class KafkaTopicConfiguration {
 //    @Bean
 //    public NewTopic topic() {
@@ -22,7 +22,7 @@ public class KafkaTopicConfiguration {
 //            TopicBuilder.name("from-topic-builder2")
 //                .partitions(3)
 //                .replicas(1)
-//                .config(TopicConfig.RETENTION_MS_CONFIG, String.valueOf(1000 * 60 * 60)) // Retention ½Ã°£À» 60ºÐÀ¸·Î ¼³Á¤
+//                .config(TopicConfig.RETENTION_MS_CONFIG, String.valueOf(1000 * 60 * 60)) // Retention ï¿½Ã°ï¿½ï¿½ï¿½ 60ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //                        .build()
 //        );
 //    }
