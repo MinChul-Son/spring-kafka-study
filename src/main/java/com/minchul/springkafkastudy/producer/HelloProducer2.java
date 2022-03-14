@@ -8,6 +8,8 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import com.minchul.springkafkastudy.model.Animal;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -15,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class HelloProducer2 {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
+    private final KafkaTemplate<String, Animal> kafkaJsonTemplate;
 
     public void async(String topic, String message) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, message);
@@ -30,6 +33,10 @@ public class HelloProducer2 {
                 System.out.println("Fail to send message = " + record);
             }
         });
+    }
+
+    public void asyncAnimal(String topic, Animal animal) {
+        kafkaJsonTemplate.send(topic, animal);
     }
 
 }
