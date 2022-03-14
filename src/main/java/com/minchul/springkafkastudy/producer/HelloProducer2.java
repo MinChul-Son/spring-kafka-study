@@ -8,14 +8,13 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class HelloProducer2 {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-
-    public HelloProducer2(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
 
     public void async(String topic, String message) {
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, message);
