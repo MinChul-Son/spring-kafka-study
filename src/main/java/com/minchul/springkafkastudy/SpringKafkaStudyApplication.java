@@ -66,11 +66,13 @@ public class SpringKafkaStudyApplication {
     @Bean
     public ApplicationRunner runner(HelloProducer2 producer, KafkaMessageListenerContainer<String, String> container) {
         return args -> {
-            producer.async("test4", "Hello, Container!!");
-            container.start();
-            container.pause();
-            container.resume();
-            container.stop();
+//            producer.async("test4", "Hello, Container!!");
+//            container.start();
+//            container.pause();
+//            container.resume();
+//            container.stop();
+
+            producer.async("test4-listener", "Hello, Kafka Listener");
         };
     }
 }
