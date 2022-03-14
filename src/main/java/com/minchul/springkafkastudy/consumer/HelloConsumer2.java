@@ -1,5 +1,7 @@
 package com.minchul.springkafkastudy.consumer;
 
+import javax.validation.Valid;
+
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.listener.adapter.ConsumerRecordMetadata;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -30,7 +32,7 @@ public class HelloConsumer2 {
     }
 
     @KafkaListener(id = "test4-animal-listener", topics = "test4-animal", containerFactory = "kafkaJsonContainerFactory")
-    public void listenAnimal(Animal animal) {
+    public void listenAnimal(@Valid Animal animal) {
         System.out.println("Animal = " + animal);
     }
 
