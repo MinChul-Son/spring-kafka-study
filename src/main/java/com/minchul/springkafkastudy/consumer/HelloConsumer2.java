@@ -6,6 +6,8 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
+import com.minchul.springkafkastudy.model.Animal;
+
 @Service
 public class HelloConsumer2 {
     /**
@@ -25,6 +27,11 @@ public class HelloConsumer2 {
         System.out.println("header.offset= " + offset);
         System.out.println("header.topic= " + topic);
         System.out.println("header.timestamp= " + timestamp);
+    }
+
+    @KafkaListener(id = "test4-animal-listener", topics = "test4-animal", containerFactory = "kafkaJsonContainerFactory")
+    public void listenAnimal(Animal animal) {
+        System.out.println("Animal = " + animal);
     }
 
 }
