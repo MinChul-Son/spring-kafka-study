@@ -1,3 +1,3 @@
 # Spring for Apache Kafka
 
-Spring°ú Kafka¸¦ À§ÇÑ ÇÐ½À ·¹Æ÷
+Spring Kafkaë¥¼ ê³µë¶€í•˜ëŠ” ê³µê°„ìž…ë‹ˆë‹¤.
