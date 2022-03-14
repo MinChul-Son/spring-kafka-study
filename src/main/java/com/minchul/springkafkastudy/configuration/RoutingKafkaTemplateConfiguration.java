@@ -14,7 +14,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.core.RoutingKafkaTemplate;
 
-@Configuration
+//@Configuration
 public class RoutingKafkaTemplateConfiguration {
     @Bean
     public RoutingKafkaTemplate routingKafkaTemplate() {

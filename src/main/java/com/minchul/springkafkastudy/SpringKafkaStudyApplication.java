@@ -14,8 +14,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 
+import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
+import com.minchul.springkafkastudy.producer.HelloProducer2;
 
 @SpringBootApplication
 public class SpringKafkaStudyApplication {
@@ -50,14 +53,30 @@ public class SpringKafkaStudyApplication {
 //        };
 //    }
 
+//    @Bean
+//    public ApplicationRunner runner(HelloProducer producer) {
+//        return args -> {
+//            producer.async("topic3", "Hello World!(async)");
+//            producer.sync("topic3", "Hello World!(sync)");
+//            producer.routingSend("topic3", "Hello World!(routing)");
+//            producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
+//            producer.replyingSend("topic3-request", "Ping Topic3");
+//        };
+//    }
+
     @Bean
-    public ApplicationRunner runner(HelloProducer producer) {
+    public ApplicationRunner runner(HelloProducer2 producer, KafkaMessageListenerContainer<String, String> container) {
         return args -> {
-            producer.async("topic3", "Hello World!(async)");
-            producer.sync("topic3", "Hello World!(sync)");
-            producer.routingSend("topic3", "Hello World!(routing)");
-            producer.routingSendBytes("topic3-bytes", "Hello World!(routing-bytes)".getBytes(StandardCharsets.UTF_8));
-            producer.replyingSend("topic3-request", "Ping Topic3");
+//            producer.async("test4", "Hello, Container!!");
+//            container.start();
+//            container.pause();
+//            container.resume();
+//            container.stop();
+
+//            producer.async("test4-listener", "Hello, Kafka Listener");
+            producer.asyncAnimal("test4-animal", new Animal("멍멍이", 2));
+//            producer.asyncAnimal("test4-animal", new Animal("멍멍이", 15)); -> 검증을 통과하지 못해 오류가 발생함
+
         };
     }
 }
