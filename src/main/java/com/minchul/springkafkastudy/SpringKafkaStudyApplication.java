@@ -19,6 +19,7 @@ import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
+import com.minchul.springkafkastudy.service.KafkaManager;
 
 @SpringBootApplication
 public class SpringKafkaStudyApplication {
@@ -81,9 +82,9 @@ public class SpringKafkaStudyApplication {
     }
 
     @Bean
-    public ApplicationRunner runner() {
+    public ApplicationRunner runner(KafkaManager kafkaManager) {
         return args -> {
-
+            kafkaManager.describeTopicConfigs();
         };
     }
 }
