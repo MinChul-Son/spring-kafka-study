@@ -19,6 +19,7 @@ import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
+import com.minchul.springkafkastudy.service.KafkaManager;
 
 @SpringBootApplication
 public class SpringKafkaStudyApplication {
@@ -64,7 +65,7 @@ public class SpringKafkaStudyApplication {
 //        };
 //    }
 
-    @Bean
+//    @Bean
     public ApplicationRunner runner(HelloProducer2 producer, KafkaMessageListenerContainer<String, String> container) {
         return args -> {
 //            producer.async("test4", "Hello, Container!!");
@@ -77,6 +78,15 @@ public class SpringKafkaStudyApplication {
             producer.asyncAnimal("test4-animal", new Animal("멍멍이", 2));
 //            producer.asyncAnimal("test4-animal", new Animal("멍멍이", 15)); -> 검증을 통과하지 못해 오류가 발생함
 
+        };
+    }
+
+    @Bean
+    public ApplicationRunner runner(KafkaManager kafkaManager) {
+        return args -> {
+            kafkaManager.changeConfig();
+            kafkaManager.describeTopicConfigs();
+            kafkaManager.deleteRecords();
         };
     }
 }

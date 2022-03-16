@@ -14,7 +14,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import com.minchul.springkafkastudy.model.Animal;
 
-@Configuration
+//@Configuration
 public class KafkaJsonTemplateConfig {
 
     @Bean
