@@ -9,7 +9,12 @@ import java.util.concurrent.ExecutionException;
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AlterConfigOp;
 import org.apache.kafka.clients.admin.ConfigEntry;
+import org.apache.kafka.clients.admin.DeleteRecordsResult;
+import org.apache.kafka.clients.admin.DeletedRecords;
 import org.apache.kafka.clients.admin.DescribeConfigsResult;
+import org.apache.kafka.clients.admin.RecordsToDelete;
+import org.apache.kafka.common.KafkaFuture;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.config.ConfigResource;
 import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.kafka.core.KafkaAdmin;
@@ -42,5 +47,20 @@ public class KafkaManager {
         Map<ConfigResource, Collection<AlterConfigOp>> ops = new HashMap<>();
         ops.put(resource, List.of(new AlterConfigOp(new ConfigEntry(TopicConfig.RETENTION_MS_CONFIG, "6000"), AlterConfigOp.OpType.SET)));
         adminClient.incrementalAlterConfigs(ops);
+    }
+
+    public void deleteRecords() throws ExecutionException, InterruptedException {
+        TopicPartition topic = new TopicPartition("test4-listener", 0);
+        Map<TopicPartition, RecordsToDelete> target = new HashMap<>();
+        target.put(topic, RecordsToDelete.beforeOffset(1));
+
+        DeleteRecordsResult deleteRecordsResult = adminClient.deleteRecords(target);
+        Map<TopicPartition, KafkaFuture<DeletedRecords>> result = deleteRecordsResult.lowWatermarks();
+
+        for (Map.Entry<TopicPartition, KafkaFuture<DeletedRecords>> entry : result.entrySet()) {
+            System.out.println(entry.getKey().topic());
+            System.out.println(entry.getKey().partition());
+            System.out.println(entry.getValue().get().lowWatermark());
+        }
     }
 }

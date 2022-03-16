@@ -86,6 +86,7 @@ public class SpringKafkaStudyApplication {
         return args -> {
             kafkaManager.changeConfig();
             kafkaManager.describeTopicConfigs();
+            kafkaManager.deleteRecords();
         };
     }
 }
