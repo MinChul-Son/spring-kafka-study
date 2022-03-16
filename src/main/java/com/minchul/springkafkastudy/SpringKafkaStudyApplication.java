@@ -84,6 +84,7 @@ public class SpringKafkaStudyApplication {
     @Bean
     public ApplicationRunner runner(KafkaManager kafkaManager) {
         return args -> {
+            kafkaManager.changeConfig();
             kafkaManager.describeTopicConfigs();
         };
     }
