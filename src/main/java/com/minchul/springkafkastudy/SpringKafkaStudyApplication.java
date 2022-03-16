@@ -64,7 +64,7 @@ public class SpringKafkaStudyApplication {
 //        };
 //    }
 
-    @Bean
+//    @Bean
     public ApplicationRunner runner(HelloProducer2 producer, KafkaMessageListenerContainer<String, String> container) {
         return args -> {
 //            producer.async("test4", "Hello, Container!!");
@@ -76,6 +76,13 @@ public class SpringKafkaStudyApplication {
 //            producer.async("test4-listener", "Hello, Kafka Listener");
             producer.asyncAnimal("test4-animal", new Animal("멍멍이", 2));
 //            producer.asyncAnimal("test4-animal", new Animal("멍멍이", 15)); -> 검증을 통과하지 못해 오류가 발생함
+
+        };
+    }
+
+    @Bean
+    public ApplicationRunner runner() {
+        return args -> {
 
         };
     }

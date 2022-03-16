@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.minchul.springkafkastudy.model.Animal;
 
-@Service
+//@Service
 public class HelloConsumer2 {
     /**
      * concurrency -> 쓰레드 개수 설정하는 옵션

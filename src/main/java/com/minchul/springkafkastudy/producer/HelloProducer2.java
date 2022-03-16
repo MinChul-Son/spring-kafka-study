@@ -12,7 +12,7 @@ import com.minchul.springkafkastudy.model.Animal;
 
 import lombok.RequiredArgsConstructor;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 public class HelloProducer2 {
 

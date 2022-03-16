@@ -14,7 +14,7 @@ import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 
 import com.minchul.springkafkastudy.consumer.listener.DefaultMessageListener;
 
-@Configuration
+//@Configuration
 public class MessageListenerContainerConfig {
 
     @Bean
