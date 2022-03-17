@@ -14,6 +14,8 @@ import org.apache.kafka.clients.admin.DeleteRecordsResult;
 import org.apache.kafka.clients.admin.DeletedRecords;
 import org.apache.kafka.clients.admin.DescribeConfigsResult;
 import org.apache.kafka.clients.admin.ListConsumerGroupsResult;
+import org.apache.kafka.clients.admin.ListOffsetsResult;
+import org.apache.kafka.clients.admin.OffsetSpec;
 import org.apache.kafka.clients.admin.RecordsToDelete;
 import org.apache.kafka.common.KafkaFuture;
 import org.apache.kafka.common.TopicPartition;
@@ -22,7 +24,10 @@ import org.apache.kafka.common.config.TopicConfig;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class KafkaManager {
 
     private final KafkaAdmin kafkaAdmin;
@@ -77,5 +82,15 @@ public class KafkaManager {
 
     public void deleteConsumerGroup() throws ExecutionException, InterruptedException {
         adminClient.deleteConsumerGroups(List.of("test4-animal-listener")).all().get();
+    }
+
+    public void findAllOffsets() throws ExecutionException, InterruptedException {
+        Map<TopicPartition, OffsetSpec> target = new HashMap<>();
+        target.put(new TopicPartition("test4-listener", 0), OffsetSpec.latest());
+
+        ListOffsetsResult result = adminClient.listOffsets(target);
+        for (TopicPartition tp : target.keySet()) {
+            log.info("topic={}, partition={}, offsets", tp.topic(), tp.partition(), result.partitionResult(tp).get());
+        }
     }
 }
