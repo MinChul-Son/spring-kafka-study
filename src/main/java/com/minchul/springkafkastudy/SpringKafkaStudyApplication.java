@@ -9,13 +9,18 @@ import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.TopicDescription;
 import org.apache.kafka.clients.admin.TopicListing;
 import org.apache.kafka.common.KafkaFuture;
+import org.apache.kafka.common.Metric;
+import org.apache.kafka.common.MetricName;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
+import org.springframework.kafka.listener.MessageListenerContainer;
 
+import com.minchul.springkafkastudy.consumer.HelloConsumer3;
 import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
@@ -81,12 +86,29 @@ public class SpringKafkaStudyApplication {
         };
     }
 
-    @Bean
-    public ApplicationRunner runner(KafkaManager kafkaManager) {
+//    @Bean
+    public ApplicationRunner runner(KafkaManager kafkaManager, KafkaTemplate<String, String> kafkaTemplate, HelloConsumer3 consumer) {
         return args -> {
             kafkaManager.changeConfig();
             kafkaManager.describeTopicConfigs();
-            kafkaManager.deleteRecords();
+//            kafkaManager.deleteRecords();
+            kafkaManager.findAllConsumerGroups();
+//            kafkaManager.deleteConsumerGroup();
+//            kafkaManager.findAllConsumerGroups();
+            kafkaManager.findAllOffsets();
+
+            kafkaTemplate.send("test5-listener", "Hello!! Test5 Listener");
+            consumer.seek();
+        };
+    }
+
+    @Bean
+    public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate, KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry) {
+        return args -> {
+            Map<MetricName, ? extends Metric> producerMetrics = kafkaTemplate.metrics();
+
+            MessageListenerContainer container = kafkaListenerEndpointRegistry.getListenerContainer("test6-listener");
+            Map<String, Map<MetricName, ? extends Metric>> consumerMetrics = container.metrics();
         };
     }
 }
