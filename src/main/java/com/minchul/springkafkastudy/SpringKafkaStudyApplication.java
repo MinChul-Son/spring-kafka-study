@@ -88,7 +88,7 @@ public class SpringKafkaStudyApplication {
             kafkaManager.describeTopicConfigs();
 //            kafkaManager.deleteRecords();
             kafkaManager.findAllConsumerGroups();
-            kafkaManager.deleteGroup();
+            kafkaManager.deleteConsumerGroup();
             kafkaManager.findAllConsumerGroups();
         };
     }
