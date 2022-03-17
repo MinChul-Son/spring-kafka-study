@@ -82,7 +82,7 @@ public class SpringKafkaStudyApplication {
         };
     }
 
-    @Bean
+//    @Bean
     public ApplicationRunner runner(KafkaManager kafkaManager, KafkaTemplate<String, String> kafkaTemplate, HelloConsumer3 consumer) {
         return args -> {
             kafkaManager.changeConfig();
