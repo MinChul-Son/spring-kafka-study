@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.KafkaMessageListenerContainer;
 
+import com.minchul.springkafkastudy.consumer.HelloConsumer3;
 import com.minchul.springkafkastudy.model.Animal;
 import com.minchul.springkafkastudy.producer.HelloProducer;
 import com.minchul.springkafkastudy.producer.HelloProducer2;
@@ -82,7 +83,7 @@ public class SpringKafkaStudyApplication {
     }
 
     @Bean
-    public ApplicationRunner runner(KafkaManager kafkaManager) {
+    public ApplicationRunner runner(KafkaManager kafkaManager, KafkaTemplate<String, String> kafkaTemplate, HelloConsumer3 consumer) {
         return args -> {
             kafkaManager.changeConfig();
             kafkaManager.describeTopicConfigs();
@@ -91,6 +92,9 @@ public class SpringKafkaStudyApplication {
 //            kafkaManager.deleteConsumerGroup();
 //            kafkaManager.findAllConsumerGroups();
             kafkaManager.findAllOffsets();
+
+            kafkaTemplate.send("test5-listener", "Hello!! Test5 Listener");
+            consumer.seek();
         };
     }
 }
