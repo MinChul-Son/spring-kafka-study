@@ -1,0 +1,8 @@
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+
+server:
+  port: 8180 # Duplicated Port Zookeeper
