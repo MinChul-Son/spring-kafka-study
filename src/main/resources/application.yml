@@ -2,7 +2,7 @@ management:
   endpoint:
     web:
       exposure:
-        include: "*"
+        include: "metrics, prometheus"
 
 server:
   port: 8180 # Duplicated Port Zookeeper
