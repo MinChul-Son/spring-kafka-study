@@ -21,7 +21,7 @@ import com.minchul.springkafkastudy.model.Animal;
 
 import lombok.RequiredArgsConstructor;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
 public class KafkaJsonListenerContainerConfig implements KafkaListenerConfigurer {
 

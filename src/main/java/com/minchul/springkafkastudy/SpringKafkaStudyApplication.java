@@ -111,4 +111,11 @@ public class SpringKafkaStudyApplication {
             Map<String, Map<MetricName, ? extends Metric>> consumerMetrics = container.metrics();
         };
     }
+
+    @Bean
+    public ApplicationRunner runner(HelloProducer2 producer) {
+        return args -> {
+            producer.asyncAnimal("test4-animal", new Animal("puppy", 15));
+        };
+    }
 }

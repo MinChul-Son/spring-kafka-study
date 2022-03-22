@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.minchul.springkafkastudy.model.Animal;
 
-//@Service
+import lombok.extern.slf4j.Slf4j;
+
+@Service
+@Slf4j
 public class HelloConsumer2 {
     /**
      * concurrency -> 쓰레드 개수 설정하는 옵션
@@ -33,7 +36,7 @@ public class HelloConsumer2 {
 
     @KafkaListener(id = "test4-animal-listener", topics = "test4-animal", containerFactory = "kafkaJsonContainerFactory")
     public void listenAnimal(@Valid Animal animal) {
-        System.out.println("Animal = " + animal);
+        log.info("animal={}", animal);
     }
 
 }
