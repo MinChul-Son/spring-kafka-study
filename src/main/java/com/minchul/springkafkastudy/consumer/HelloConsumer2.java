@@ -2,9 +2,13 @@ package com.minchul.springkafkastudy.consumer;
 
 import javax.validation.Valid;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.KafkaListenerErrorHandler;
+import org.springframework.kafka.listener.ListenerExecutionFailedException;
 import org.springframework.kafka.listener.adapter.ConsumerRecordMetadata;
 import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +38,7 @@ public class HelloConsumer2 {
         System.out.println("header.timestamp= " + timestamp);
     }
 
-    @KafkaListener(id = "test4-animal-listener", topics = "test4-animal", containerFactory = "kafkaJsonContainerFactory")
+    @KafkaListener(id = "test4-animal-listener", topics = "test4-animal", containerFactory = "kafkaJsonContainerFactory", errorHandler = "validationHandler")
     public void listenAnimal(@Valid Animal animal) {
         log.info("animal={}", animal);
     }
