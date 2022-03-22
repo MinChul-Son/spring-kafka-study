@@ -102,7 +102,7 @@ public class SpringKafkaStudyApplication {
         };
     }
 
-    @Bean
+//    @Bean
     public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate, KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry) {
         return args -> {
             Map<MetricName, ? extends Metric> producerMetrics = kafkaTemplate.metrics();
