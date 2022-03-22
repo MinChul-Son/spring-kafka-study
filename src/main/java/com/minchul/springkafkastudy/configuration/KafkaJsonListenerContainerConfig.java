@@ -14,14 +14,16 @@ import org.springframework.kafka.config.KafkaListenerEndpointRegistrar;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.listener.DefaultErrorHandler;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
+import org.springframework.util.backoff.FixedBackOff;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.minchul.springkafkastudy.model.Animal;
 
 import lombok.RequiredArgsConstructor;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
 public class KafkaJsonListenerContainerConfig implements KafkaListenerConfigurer {
 
@@ -31,6 +33,7 @@ public class KafkaJsonListenerContainerConfig implements KafkaListenerConfigurer
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, Animal>> kafkaJsonContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, Animal> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(animalConsumerFactory());
+        factory.setCommonErrorHandler(new DefaultErrorHandler(new FixedBackOff(1000L, 2L)));
         return factory;
     }
 

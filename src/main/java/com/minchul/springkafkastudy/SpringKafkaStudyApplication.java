@@ -102,13 +102,20 @@ public class SpringKafkaStudyApplication {
         };
     }
 
-    @Bean
+//    @Bean
     public ApplicationRunner runner(KafkaTemplate<String, String> kafkaTemplate, KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry) {
         return args -> {
             Map<MetricName, ? extends Metric> producerMetrics = kafkaTemplate.metrics();
 
             MessageListenerContainer container = kafkaListenerEndpointRegistry.getListenerContainer("test6-listener");
             Map<String, Map<MetricName, ? extends Metric>> consumerMetrics = container.metrics();
+        };
+    }
+
+    @Bean
+    public ApplicationRunner runner(HelloProducer2 producer) {
+        return args -> {
+            producer.asyncAnimal("test4-animal", new Animal("puppy", 15));
         };
     }
 }
